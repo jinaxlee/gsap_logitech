@@ -327,7 +327,6 @@ window.addEventListener("DOMContentLoaded", function () {
       start: "6000 top",
       end: "bottom bottom",
       scrub: true,
-      markers: true,
       onEnter: () => {
         video05.play();
       },
@@ -339,4 +338,40 @@ window.addEventListener("DOMContentLoaded", function () {
       // toggleClass: 'on', // 가로 스크롤 지점을 인식할 수 없음 - #section05 요소의 top과 bottom을 인식
     },
   });
+
+  // 섹션 6 화면 위치할 때 글자 슬라이드 업
+  gsap.to("#section06", {
+    scrollTrigger: {
+      trigger: "#section06",
+      start: "top top",
+      pin: true,
+      toggleClass: "on",
+      markers: true,
+    },
+  });
+
+  // 섹션 6 화면 위치 시 스크롤 고정
+  gsap.to(".fix-this-6", {
+    scrollTrigger: {
+      trigger: ".trigger-this-6",
+      start: "top top",
+      end: "bottom bottom",
+      pin: true,
+      // markers: true,
+    },
+  });
+
+  let sec06 = gsap.timeline();
+  ScrollTrigger.create({
+    animation: sec06,
+    trigger: "#section06",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    markers: true,
+  });
+
+  sec06.to("#section06 .side .left", { x: -1000 }, 0);
+  sec06.to("#section06 .side .right", { x: 1000 }, 0);
+  sec06.to("#section06 .underbar", { y: 1000 }, 0);
 });
