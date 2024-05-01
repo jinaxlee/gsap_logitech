@@ -588,4 +588,79 @@ window.addEventListener("DOMContentLoaded", function () {
       markers: true,
     },
   });
+
+  const video10 = document.querySelector("#sc10_video");
+  const video11 = document.querySelector("#sc11_video");
+
+  function playVideoSec10(top, vidElmt) {
+    gsap.to("#section10", {
+      scrollTrigger: {
+        trigger: "#section10",
+        start: `${top} top`,
+        scrub: true,
+        // markers: true,
+        onEnter: () => {
+          vidElmt.play();
+        },
+
+        onLeaveBack: () => {
+          vidElmt.currentTime = 0; // 비디오 재생 시간을 0으로 되돌림
+          vidElmt.pause();
+        }, // 화면 스크롤을 되돌릴때 스크럽 연결 - 없으면 on 클래스가 제거되지 않음
+      },
+    });
+  }
+
+  playVideoSec10("-500", video10);
+  playVideoSec10("1200", video11);
+
+  // javascript add or remove class:
+  // abc.classList.add('on') or abc.classList.remove('on')
+
+  // select element :
+  // document.querySelector('.abc');
+
+  // jQuery add or remove class:
+  // abc.addClass('on') or abc.removeClass('on')
+
+  // select elemet:
+  // $('.abc')
+
+  function animateTextSec10(top, elmt) {
+    gsap.to(elmt, {
+      scrollTrigger: {
+        trigger: "#section10",
+        start: `${top} top`,
+        scrub: true,
+        markers: true,
+        onEnter: () => {
+          $(elmt).addClass("on");
+        },
+
+        onLeaveBack: () => {
+          $(elmt).removeClass("on");
+        },
+      },
+    });
+  }
+
+  animateTextSec10("400", "#section10 .page03");
+  animateTextSec10("3300", "#section10 .page05 .container01 .title");
+  animateTextSec10("3900", "#section10 .page05 .container02 .title");
+  animateTextSec10("4500", "#section10 .page05 .container03 .title");
+
+  function scrollMouse(evenOdd, height) {
+    gsap.to(`#section10 .page03 .mouse ${evenOdd}`, {
+      y: height * 2,
+      scrollTrigger: {
+        trigger: "#section10",
+        start: "200 top",
+        scrub: true,
+        // markers: true,
+      },
+    });
+  }
+
+  scrollMouse(".odd", -innerHeight);
+  scrollMouse(".even", innerHeight);
 });
